@@ -6,9 +6,6 @@ import org.hibernate.cfg.Configuration;
 
 public class Login {
 
-    private String userName;
-    private String password;
-
     // Öppnar en anslutning mot databasen, kopplat till Login entityn.
 
     SessionFactory factory = new Configuration()
