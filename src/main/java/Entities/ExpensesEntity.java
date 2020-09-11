@@ -17,6 +17,9 @@ public class ExpensesEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "work_order_id")
+    private int workOrderId;
+
     public ExpensesEntity() {
 
     }
@@ -35,6 +38,10 @@ public class ExpensesEntity implements Serializable {
         return description;
     }
 
+    public int getWorkOrderId() {
+        return workOrderId;
+    }
+
     // ----Setters---- //
 
     public void setId(int id) {
@@ -47,6 +54,10 @@ public class ExpensesEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setWorkOrderId(int workOrderId) {
+        this.workOrderId = workOrderId;
     }
 
     @Override
