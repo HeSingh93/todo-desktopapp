@@ -13,7 +13,7 @@ public class UserInterface {
     WorkOrder workOrder = new WorkOrder();
 
     public void start() {
-        login();
+        //login();
         System.out.println(printMenu());
 
         while (true) {
@@ -78,6 +78,7 @@ public class UserInterface {
                 if (tempUser.getUserName().equals(userName) && tempUser.getPassword().equals(password) && tempUser.isAdmin()) {
                     session.save(tempUser);
                     System.out.println("INSIDE IF");
+                    System.out.println("Welcome " + tempUser.getUserName() + "!");
                     System.out.println(tempUser);
                 }
             }
