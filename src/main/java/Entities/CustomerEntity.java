@@ -27,6 +27,8 @@ public class CustomerEntity implements Serializable {
         // No-arg constructor
     }
 
+    // ----Getters---- //
+
     public int getId() {
         return id;
     }
