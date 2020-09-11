@@ -10,7 +10,7 @@ public class UserInterface {
         System.out.println(printMenu());
 
         while (true) {
-            System.out.println("\nInput alternative:");
+            System.out.println("\nInput alternative::");
             String input = scanner.nextLine();
 
             switch (input) {
