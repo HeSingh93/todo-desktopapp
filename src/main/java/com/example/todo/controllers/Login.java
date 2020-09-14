@@ -36,7 +36,7 @@ public class Login {
                     System.out.println("INSIDE THE LOGIN CLASS METHOD");
                     UserInterface ui = new UserInterface();
                     getEmployees();
-                    getWorkOrkorder();
+                    getWorkOrder();
                     ui.start();
                 }
             }
@@ -76,7 +76,7 @@ public class Login {
         }
     }
 
-    public void getWorkOrkorder() {
+    public void getWorkOrder() {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(LoginEntity.class)
@@ -87,7 +87,7 @@ public class Login {
 
         try {
             session.beginTransaction();
-            List<WorkOrderEntity> tempWorkOrders = session.createQuery("from EmployeeEntity").getResultList();
+            List<WorkOrderEntity> tempWorkOrders = session.createQuery("from WorkOrderEntity").getResultList();
             for (WorkOrderEntity workOrderEntity : tempWorkOrders) {
                 System.out.println(workOrderEntity);
                 workOrders.add(workOrderEntity);
