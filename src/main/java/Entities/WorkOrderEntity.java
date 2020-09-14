@@ -47,5 +47,117 @@ public class WorkOrderEntity {
     @Column(name = "comment")
     private String comment;
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getWorkDescription() {
+        return workDescription;
+    }
+
+    public void setWorkDescription(String workDescription) {
+        this.workDescription = workDescription;
+    }
+
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getWorkStarted() {
+        return workStarted;
+    }
+
+    public void setWorkStarted(Date workStarted) {
+        this.workStarted = workStarted;
+    }
+
+    public Date getWorkFinished() {
+        return workFinished;
+    }
+
+    public void setWorkFinished(Date workFinished) {
+        this.workFinished = workFinished;
+    }
+
+    public double getTravelHours() {
+        return travelHours;
+    }
+
+    public void setTravelHours(double travelHours) {
+        this.travelHours = travelHours;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkOrderEntity{" +
+                "id=" + id +
+                ", date=" + date +
+                ", address='" + address + '\'' +
+                ", workDescription='" + workDescription + '\'' +
+                ", contactInfo='" + contactInfo + '\'' +
+                ", customerId=" + customerId +
+                ", employeeId=" + employeeId +
+                ", status=" + status +
+                ", workStarted=" + workStarted +
+                ", workFinished=" + workFinished +
+                ", travelHours=" + travelHours +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }

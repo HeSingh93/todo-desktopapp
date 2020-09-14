@@ -2,7 +2,6 @@ package com.example.todo.controllers;
 
 import Entities.EmployeeEntity;
 import Entities.WorkOrderEntity;
-import org.hibernate.cfg.Configuration;
 
 import java.util.HashMap;
 
