@@ -2,6 +2,8 @@ package com.example.todo.controllers;
 
 import Entities.EmployeeEntity;
 import Entities.WorkOrderEntity;
+import org.hibernate.cfg.Configuration;
+
 import java.util.HashMap;
 
 public class WorkOrder {
@@ -13,6 +15,7 @@ public class WorkOrder {
 
     public void addWorkOrder(EmployeeEntity employeeEntity, WorkOrderEntity workOrderEntity) {
         this.workOrders.putIfAbsent(employeeEntity, workOrderEntity);
+
     }
 
     public void updateWorkOrder() {

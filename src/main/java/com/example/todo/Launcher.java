@@ -16,7 +16,6 @@ public class Launcher {
         String password = scanner.nextLine();
         signin.login(username, password);
 
-
         //   login();
         // ui.start();
 

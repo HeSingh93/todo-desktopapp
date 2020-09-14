@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class EmployeeEntity implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
@@ -22,6 +23,20 @@ public class EmployeeEntity implements Serializable {
 
     public EmployeeEntity() {
         // No-arg constructor
+    }
+
+    // ----Setters---- //
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setTelephoneNo(String telephoneNo) {
+        this.telephoneNo = telephoneNo;
     }
 
     // ----Getters---- //

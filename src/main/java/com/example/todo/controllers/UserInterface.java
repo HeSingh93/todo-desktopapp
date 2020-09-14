@@ -1,6 +1,8 @@
 package com.example.todo.controllers;
 
+import Entities.EmployeeEntity;
 import Entities.LoginEntity;
+import Entities.WorkOrderEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -13,7 +15,6 @@ public class UserInterface {
     WorkOrder workOrder = new WorkOrder();
 
     public void start() {
-        //login();
         System.out.println(printMenu());
 
         while (true) {
@@ -25,7 +26,23 @@ public class UserInterface {
                     System.out.println(printMenu());
                     break;
                 case "1":
-                    //workOrder.addWorkOrder(EmployeeEntity, WorkOrderEntity)
+                    EmployeeEntity newEmployee = new EmployeeEntity();
+                    System.out.println("Enter the employees firstname: ");
+                    String firstName = scanner.nextLine();
+                    newEmployee.setFirstName(firstName);
+
+                    System.out.println("Enter the employees lastname:");
+                    String lastName = scanner.nextLine();
+                    newEmployee.setLastName(lastName);
+
+                    System.out.println("Enter the employees telephonenumber: ");
+                    String phoneNo = scanner.nextLine();
+                    newEmployee.setTelephoneNo(phoneNo);
+
+                    WorkOrderEntity workOrder = new WorkOrderEntity();
+
+                   // workOrder.addWorkOrder(newEmployee, workOrder);
+
                     break;
                 case "2":
                     //workOrder.removeWorkOrder(EmployeeEntity, WorkOrderEntity)
@@ -54,42 +71,5 @@ public class UserInterface {
 
     }
 
-    public void login() {
 
-        System.out.println("Input username: ");
-        String userName = scanner.nextLine();
-
-        System.out.println("Input password: ");
-        String password = scanner.nextLine();
-
-        SessionFactory factory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(LoginEntity.class)
-                .buildSessionFactory();
-
-        Session session = factory.getCurrentSession();
-
-        try {
-            session.beginTransaction();
-
-            List<LoginEntity> theUser = session.createQuery("from LoginEntity where username = '" + userName + "'").getResultList();
-
-            for (LoginEntity tempUser : theUser) {
-                if (tempUser.getUserName().equals(userName) && tempUser.getPassword().equals(password) && tempUser.isAdmin()) {
-                    session.save(tempUser);
-                    System.out.println("INSIDE IF");
-                    System.out.println("Welcome " + tempUser.getUserName() + "!");
-                    System.out.println(tempUser);
-                }
-            }
-            session.getTransaction().commit();
-            System.out.println("OUTSIDE");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            factory.close();
-            session.close();
-        }
-    }
 }
