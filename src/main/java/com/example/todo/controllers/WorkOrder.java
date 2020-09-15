@@ -32,7 +32,25 @@ public class WorkOrder {
         //todo: add functionality
     }
 
-    public void removeWorkOrder() {
+    public void removeWorkOrder(WorkOrderEntity workOrderEntity) {
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(WorkOrderEntity.class)
+                .buildSessionFactory();
+
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            session.remove(workOrderEntity);
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            factory.close();
+            session.close();
+        }
     }
 
 }
