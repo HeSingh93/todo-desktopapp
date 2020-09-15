@@ -1,31 +1,38 @@
 package com.example.todo.controllers;
-
-import Entities.EmployeeEntity;
 import Entities.WorkOrderEntity;
-
-import java.util.HashMap;
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
 
 public class WorkOrder {
-    private HashMap<EmployeeEntity, WorkOrderEntity> workOrders;
 
-    public WorkOrder() {
-        this.workOrders = new HashMap<>();
-    }
 
-    public void addWorkOrder(EmployeeEntity employeeEntity, WorkOrderEntity workOrderEntity) {
-        this.workOrders.putIfAbsent(employeeEntity, workOrderEntity);
+    public void addWorkOrder(WorkOrderEntity workOrderEntity) {
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(WorkOrderEntity.class)
+                .buildSessionFactory();
 
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            session.save(workOrderEntity);
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            factory.close();
+            session.close();
+        }
     }
 
     public void updateWorkOrder() {
         //todo: add functionality
     }
 
-    public void removeWorkOrder(EmployeeEntity employeeEntity, WorkOrderEntity workOrderEntity) {
-        this.workOrders.remove(employeeEntity, workOrderEntity);
+    public void removeWorkOrder() {
     }
 
-    public String toString() {
-        return this.workOrders.toString();
-    }
 }

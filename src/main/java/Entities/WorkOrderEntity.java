@@ -1,13 +1,16 @@
 package Entities;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "public.work_orders")
+@Table(name = "work_orders")
 public class WorkOrderEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 

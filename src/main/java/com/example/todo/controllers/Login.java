@@ -28,6 +28,8 @@ public class Login {
 
             List<LoginEntity> theUser = session.createQuery("from LoginEntity where username = '" + userName + "'").getResultList();
 
+            System.out.println(theUser);
+
             for (LoginEntity tempUser : theUser) {
                 if (tempUser.getUserName().equals(userName) && tempUser.getPassword().equals(password) && tempUser.isAdmin()) {
                     session.save(tempUser);

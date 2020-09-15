@@ -1,14 +1,7 @@
 package com.example.todo.controllers;
 
-import Entities.EmployeeEntity;
-import Entities.LoginEntity;
 import Entities.WorkOrderEntity;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
@@ -26,23 +19,7 @@ public class UserInterface {
                     System.out.println(printMenu());
                     break;
                 case "1":
-                    EmployeeEntity newEmployee = new EmployeeEntity();
-                    System.out.println("Enter the employees firstname: ");
-                    String firstName = scanner.nextLine();
-                    newEmployee.setFirstName(firstName);
-
-                    System.out.println("Enter the employees lastname:");
-                    String lastName = scanner.nextLine();
-                    newEmployee.setLastName(lastName);
-
-                    System.out.println("Enter the employees telephonenumber: ");
-                    String phoneNo = scanner.nextLine();
-                    newEmployee.setTelephoneNo(phoneNo);
-
-                    WorkOrderEntity workOrder = new WorkOrderEntity();
-
-                   // workOrder.addWorkOrder(newEmployee, workOrder);
-
+                    addNewWorkOrder();
                     break;
                 case "2":
                     //workOrder.removeWorkOrder(EmployeeEntity, WorkOrderEntity)
@@ -71,5 +48,43 @@ public class UserInterface {
 
     }
 
+    public void addNewWorkOrder() {
+        WorkOrderEntity newWorkOrder = new WorkOrderEntity();
+
+        System.out.println("\nAdding work order");
+        System.out.println("Enter work order year:");
+        int year = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter work order month:");
+        int month = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter work order day:");
+        int day = Integer.parseInt(scanner.nextLine());
+        Date date = new Date(year, month, day);
+
+        newWorkOrder.setDate(date);
+
+        System.out.println("Enter work order address:");
+        String address = scanner.nextLine();
+
+        newWorkOrder.setAddress(address);
+
+        System.out.println("Enter description:");
+        String description = scanner.nextLine();
+
+        newWorkOrder.setWorkDescription(description);
+
+        System.out.println("Enter contact info:");
+        String contactInfo = scanner.nextLine();
+
+        newWorkOrder.setContactInfo(contactInfo);
+
+        System.out.println("Enter customer id:");
+        int customerId = Integer.parseInt(scanner.nextLine());
+
+        newWorkOrder.setCustomerId(customerId);
+
+        newWorkOrder.setStatus(WorkOrderStatus.UNASSIGNED);
+
+        workOrder.addWorkOrder(newWorkOrder);
+    }
 
 }
