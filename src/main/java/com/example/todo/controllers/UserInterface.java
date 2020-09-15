@@ -115,8 +115,6 @@ public class UserInterface {
                     " Customer: " + workOrderEntity.getContactInfo());
         }
 
-        System.out.println(workOrders.size());
-
         System.out.println("Which work order would you like to remove?");
         int workOrdertoBeRemoved = Integer.parseInt(scanner.nextLine());
         while (workOrdertoBeRemoved > workOrders.size() || workOrdertoBeRemoved < 1) {
