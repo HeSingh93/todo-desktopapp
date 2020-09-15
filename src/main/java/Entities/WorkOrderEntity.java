@@ -28,13 +28,13 @@ public class WorkOrderEntity {
     private String contactInfo;
 
     @Column(name = "customer_id")
-    private int customerId;
+    private Integer customerId;
 
     @Column(name = "employee_id")
-    private int employeeId;
+    private Integer employeeId;
 
     @Column(name = "status")
-    private int status;
+    private Integer status;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "work_started")
