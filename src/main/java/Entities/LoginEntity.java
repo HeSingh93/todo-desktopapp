@@ -10,7 +10,7 @@ public class LoginEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "username")
     private String userName;
@@ -19,17 +19,13 @@ public class LoginEntity implements Serializable {
     private String password;
 
     @Column(name = "employee_id")
-    private int employeeId;
+    private Integer employeeId;
 
     @Column(name = "is_admin")
     private boolean isAdmin;
 
     public LoginEntity() {
-    }
-
-    public LoginEntity(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
+        // No-arg constructor
     }
 
     // ----Getters---- //
