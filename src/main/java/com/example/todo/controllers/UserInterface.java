@@ -34,11 +34,11 @@ public class UserInterface {
                     addNewWorkOrder();
                     break;
                 case "2":
+                    getWorkOrder();
                     removeWorkOrder();
-                    //workOrder.removeWorkOrder(EmployeeEntity, WorkOrderEntity)
                     break;
                 case "3":
-                    //workOrder.updateWorkOrder(EmployeeEntity, WorkOrderEntity)
+                    addNewEmployee();
                     break;
                 case "4":
                     //Login.logOut()
@@ -55,7 +55,7 @@ public class UserInterface {
                 "Main menu:" +
                         "\n 1. Add new work order." +
                         "\n 2. Remove work order." +
-                        "\n 3. Change an existing work order." +
+                        "\n 3. Add a new employee and account" +
                         "\n 4. Log out." +
                         "\n 0. Reprint menu.";
 
@@ -176,4 +176,42 @@ public class UserInterface {
             session.close();
         }
     }
+
+    public void addNewEmployee() {
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        LoginEntity loginEntity = new LoginEntity();
+        SignUp signup = new SignUp();
+
+        System.out.println("Adding a new employee and account");
+        System.out.println("Enter first name:");
+        String firstName = scanner.nextLine();
+        employeeEntity.setFirstName(firstName);
+
+        System.out.println("Enter last name:");
+        String lastName = scanner.nextLine();
+        employeeEntity.setLastName(lastName);
+
+        System.out.println("Enter telephone number:");
+        String telephoneNo = scanner.nextLine();
+        employeeEntity.setTelephoneNo(telephoneNo);
+
+        signup.signUpEmployee(employeeEntity);
+        getEmployees();
+
+        System.out.println("Enter username:");
+        String userName = scanner.nextLine();
+        loginEntity.setUserName(userName);
+
+        System.out.println("Enter password:");
+        String password = scanner.nextLine();
+        loginEntity.setPassword(password);
+        loginEntity.setAdmin(false);
+
+        loginEntity.setEmployeeId(employees.get(employees.size() - 1).getId());
+        signup.signUpAccount(loginEntity);
+    }
+
+    public void viewWorkOrders() {
+    }
+
 }
