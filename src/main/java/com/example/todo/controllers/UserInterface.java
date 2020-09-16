@@ -61,6 +61,8 @@ public class UserInterface {
 
     }
 
+
+    //method to add a new work order to database
     public void addNewWorkOrder() {
         WorkOrderEntity newWorkOrder = new WorkOrderEntity();
 
@@ -101,6 +103,7 @@ public class UserInterface {
         workOrder.addWorkOrder(newWorkOrder);
     }
 
+    //method to remove work order from database
     public void removeWorkOrder() {
         if (workOrders.isEmpty()) {
             System.out.println("There are no registered work orders at this time.");
@@ -127,6 +130,7 @@ public class UserInterface {
         workOrders.remove(workOrdertoBeRemoved - 1);
     }
 
+    //method to create a list of all employees in database
     public void getEmployees() {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -152,6 +156,7 @@ public class UserInterface {
         }
     }
 
+    //method to make a list of all work orders in database
     public void getWorkOrder() {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -177,6 +182,7 @@ public class UserInterface {
         }
     }
 
+    //method to add a new employee to database
     public void addNewEmployee() {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         LoginEntity loginEntity = new LoginEntity();
