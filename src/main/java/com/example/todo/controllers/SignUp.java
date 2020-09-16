@@ -8,21 +8,21 @@ import org.hibernate.cfg.Configuration;
 
 public class SignUp {
 
-    public void signUp(String userName, String password) {
+    public void signUpAccount(LoginEntity loginEntity) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(LoginEntity.class)
-                .addAnnotatedClass(EmployeeEntity.class)
                 .buildSessionFactory();
 
         Session session = factory.getCurrentSession();
 
         try {
             session.beginTransaction();
+            session.save(loginEntity);
+            session.getTransaction().commit();
 
 
-
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             session.close();
@@ -30,4 +30,27 @@ public class SignUp {
         }
     }
 
+    public void signUpEmployee(EmployeeEntity employeeEntity) {
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(EmployeeEntity.class)
+                .buildSessionFactory();
+
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            session.save(employeeEntity);
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+            factory.close();
+        }
+    }
 }
+
+
+
