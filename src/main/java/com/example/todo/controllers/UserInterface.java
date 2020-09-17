@@ -51,9 +51,10 @@ public class UserInterface {
         }
     }
 
+    //method to print the main menu
     public String printMenu() {
         return
-                "Main menu:" +
+                "\nMain menu:" +
                         "\n 1. Add new work order." +
                         "\n 2. Remove work order." +
                         "\n 3. View work orders" +
@@ -144,10 +145,7 @@ public class UserInterface {
         try {
             session.beginTransaction();
             List<EmployeeEntity> tempEmployees = session.createQuery("from EmployeeEntity").getResultList();
-            for (EmployeeEntity employeeEntity : tempEmployees) {
-                System.out.println(employeeEntity);
-                employees.add(employeeEntity);
-            }
+            employees.addAll(tempEmployees);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -216,7 +214,6 @@ public class UserInterface {
     }
 
     public void viewWorkOrders() {
-        getWorkOrder();
         for (WorkOrderEntity order : workOrders) {
             System.out.println("________________________" +
                     "\n Workorder Id: " + order.getId() +
