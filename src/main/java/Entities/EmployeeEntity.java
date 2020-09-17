@@ -41,7 +41,7 @@ public class EmployeeEntity implements Serializable {
 
     // ----Getters---- //
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -63,7 +63,6 @@ public class UserInterface {
 
     }
 
-
     //method to add a new work order to database
     public void addNewWorkOrder() {
         WorkOrderEntity newWorkOrder = new WorkOrderEntity();
@@ -171,10 +170,7 @@ public class UserInterface {
         try {
             session.beginTransaction();
             List<WorkOrderEntity> tempWorkOrders = session.createQuery("from WorkOrderEntity").getResultList();
-            for (WorkOrderEntity workOrderEntity : tempWorkOrders) {
-                System.out.println(workOrderEntity);
-                workOrders.add(workOrderEntity);
-            }
+            workOrders.addAll(tempWorkOrders);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -223,7 +219,7 @@ public class UserInterface {
         getWorkOrder();
         for (WorkOrderEntity order : workOrders) {
             System.out.println("________________________" +
-                    "\nWorkorder Id: " + order.getId() +
+                    "\n Workorder Id: " + order.getId() +
                     "\n Date of order: " + order.getDate() +
                     "\n Adress: " + order.getAddress() +
                     "\n Work description: " + order.getWorkDescription() +

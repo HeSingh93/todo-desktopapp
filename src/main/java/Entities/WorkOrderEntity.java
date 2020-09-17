@@ -12,7 +12,7 @@ public class WorkOrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date")
@@ -50,7 +50,7 @@ public class WorkOrderEntity {
     @Column(name = "comment")
     private String comment;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -90,7 +90,7 @@ public class WorkOrderEntity {
         this.contactInfo = contactInfo;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
@@ -98,7 +98,7 @@ public class WorkOrderEntity {
         this.customerId = customerId;
     }
 
-    public int getEmployeeId() {
+    public Integer getEmployeeId() {
         return employeeId;
     }
 

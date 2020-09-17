@@ -30,7 +30,7 @@ public class LoginEntity implements Serializable {
 
     // ----Getters---- //
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -52,7 +52,7 @@ public class LoginEntity implements Serializable {
 
     // ----Setters---- //
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

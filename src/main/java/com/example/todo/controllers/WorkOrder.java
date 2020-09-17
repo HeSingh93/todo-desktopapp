@@ -5,7 +5,6 @@ import org.hibernate.cfg.Configuration;
 
 public class WorkOrder {
 
-
     public void addWorkOrder(WorkOrderEntity workOrderEntity) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")

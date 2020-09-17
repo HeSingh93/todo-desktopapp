@@ -7,8 +7,8 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class Login {
-    // Opens a connection to the database via the Login Entity
 
+    // Opens a connection to the database via the Login Entity
     public void login(String userName, String password) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -22,14 +22,10 @@ public class Login {
 
             List<LoginEntity> theUser = session.createQuery("from LoginEntity where username = '" + userName + "'").getResultList();
 
-            System.out.println(theUser);
-
             for (LoginEntity tempUser : theUser) {
                 if (tempUser.getUserName().equals(userName) && tempUser.getPassword().equals(password) && tempUser.isAdmin()) {
                     session.save(tempUser);
                     System.out.println("Welcome " + tempUser.getUserName() + "!");
-                    System.out.println(tempUser);
-                    System.out.println("INSIDE THE LOGIN CLASS METHOD");
                     UserInterface ui = new UserInterface();
                     ui.start();
                 }
@@ -44,7 +40,7 @@ public class Login {
             session.close();
         }
     }
-
+//TODO Lägg in while-loop
 
 }
 
