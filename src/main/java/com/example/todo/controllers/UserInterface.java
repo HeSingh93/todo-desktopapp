@@ -38,13 +38,14 @@ public class UserInterface {
                     removeWorkOrder();
                     break;
                 case "3":
-                    addNewEmployee();
+                    viewWorkOrders();
                     break;
                 case "4":
-                    //Login.logOut()
+                    addNewEmployee();
+                    break;
             }
 
-            if (input.equals("4")) {
+            if (input.equals("5")) {
                 break;
             }
         }
@@ -55,8 +56,9 @@ public class UserInterface {
                 "Main menu:" +
                         "\n 1. Add new work order." +
                         "\n 2. Remove work order." +
-                        "\n 3. Add a new employee and account" +
-                        "\n 4. Log out." +
+                        "\n 3. View work orders" +
+                        "\n 4. Add a new employee" +
+                        "\n 5. Sign out" +
                         "\n 0. Reprint menu.";
 
     }
@@ -218,6 +220,15 @@ public class UserInterface {
     }
 
     public void viewWorkOrders() {
+        getWorkOrder();
+        for (WorkOrderEntity order : workOrders) {
+            System.out.println("________________________" +
+                    "\nWorkorder Id: " + order.getId() +
+                    "\n Date of order: " + order.getDate() +
+                    "\n Adress: " + order.getAddress() +
+                    "\n Work description: " + order.getWorkDescription() +
+                    "\n Contact information: " + order.getContactInfo() +
+                    "\n Comments: " + order.getComment());
+        }
     }
-
 }
