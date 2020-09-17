@@ -103,6 +103,7 @@ public class UserInterface {
         newWorkOrder.setStatus(WorkOrderStatus.UNASSIGNED);
 
         workOrder.addWorkOrder(newWorkOrder);
+        workOrders.add(newWorkOrder);
     }
 
     //method to remove work order from database
