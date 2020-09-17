@@ -34,7 +34,6 @@ public class UserInterface {
                     addNewWorkOrder();
                     break;
                 case "2":
-                    getWorkOrder();
                     removeWorkOrder();
                     break;
                 case "3":
