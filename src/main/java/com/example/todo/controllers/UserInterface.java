@@ -298,7 +298,7 @@ public class UserInterface {
                     "\n Date of order: " + order.getDate() +
                     "\n Adress: " + order.getAddress() +
                     "\n Work description: " + order.getWorkDescription() +
-                    "\n Contact information: " + order.getContactInfo();
+                    "\n Contact information: " + order.getContactInfo());
         }
     }
 }
