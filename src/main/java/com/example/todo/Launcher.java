@@ -13,10 +13,11 @@ public class Launcher {
         UserInterface ui = new UserInterface();
         boolean isLoggedIn = false;
 
+        System.out.println("Welcome!\n");
         while (!isLoggedIn) {
-            System.out.println("Welcome, enter your username: ");
+            System.out.println("Enter your username: ");
             String username = scanner.nextLine();
-            System.out.println("Input password: ");
+            System.out.println("Enter your password: ");
             String password = scanner.nextLine();
             if (signin.login(username, password)) {
                 isLoggedIn = true;

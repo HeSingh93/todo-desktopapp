@@ -11,6 +11,8 @@ public class Login {
     // Opens a connection to the database via the Login Entity
     public boolean login(String userName, String password) {
         boolean validLogin = false;
+        LoginEntity theUser = null;
+
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(LoginEntity.class)
@@ -19,18 +21,25 @@ public class Login {
         Session session = factory.getCurrentSession();
         try {
             session.beginTransaction();
-            LoginEntity theUser = session.createQuery("from LoginEntity where username = '" + userName + "'", LoginEntity.class).getSingleResult();
+            theUser = session
+                    .createQuery("from LoginEntity where username = '" + userName + "'", LoginEntity.class)
+                    .getSingleResult();
 
-            if (theUser.getUserName().equals(userName) && theUser.getPassword().equals(password) && theUser.isAdmin()) {
-                System.out.println("Welcome " + theUser.getUserName() + "!");
-                validLogin = true;
-            }
             session.getTransaction().commit();
+
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(" ");
         } finally {
-            factory.close();
             session.close();
+            factory.close();
+        }
+
+        if (theUser != null && theUser.getUserName().equals(userName) &&
+                theUser.getPassword().equals(password) && theUser.isAdmin()) {
+            System.out.println("Welcome " + theUser.getUserName() + "!");
+            validLogin = true;
+        } else {
+            System.out.println("Invalid login credentials, try again.\n");
         }
 
         return validLogin;
