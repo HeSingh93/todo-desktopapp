@@ -90,8 +90,22 @@ public class UserInterface {
         System.out.println("Enter work order day:");
         int day = Integer.parseInt(scanner.nextLine());
 
+        System.out.println("Enter work order start hour:");
+        int hour = Integer.parseInt(scanner.nextLine());
+        while (hour > 24 || hour < 1) {
+            System.out.println("Invalid hour!" + "\nPlease enter a valid hour(1-24)");
+            hour = Integer.parseInt(scanner.nextLine());
+        }
+
+        System.out.println("Enter work order start minutes");
+        int minute = Integer.parseInt(scanner.nextLine());
+        while (minute > 60 || minute < 0) {
+            System.out.println("Invalid minute!" + "\nPlease enter a valid minute(1-60)");
+            minute = Integer.parseInt(scanner.nextLine());
+        }
+
         Calendar cal = Calendar.getInstance();
-        cal.set(year, month - 1, day);
+        cal.set(year, month - 1, day, hour, minute);
 
         Date date = cal.getTime();
         newWorkOrder.setDate(date);
@@ -284,8 +298,7 @@ public class UserInterface {
                     "\n Date of order: " + order.getDate() +
                     "\n Adress: " + order.getAddress() +
                     "\n Work description: " + order.getWorkDescription() +
-                    "\n Contact information: " + order.getContactInfo() +
-                    "\n Comments: " + order.getComment());
+                    "\n Contact information: " + order.getContactInfo();
         }
     }
 }
