@@ -37,22 +37,26 @@ public class UserInterface {
                     addNewWorkOrder();
                     break;
                 case "2":
-                    removeWorkOrder();
+                    changeWorkOrder();
                     break;
                 case "3":
-                    getAccounts();
-                    viewWorkOrders();
-                    viewEmployees();
+                    removeWorkOrder();
                     break;
                 case "4":
-                    addNewEmployee();
+                    viewWorkOrders();
                     break;
                 case "5":
+                    addNewEmployee();
+                    break;
+                case "6":
+                    viewEmployees();
+                    break;
+                case "7":
                     updateAccount();
                     break;
             }
 
-            if (input.equals("6")) {
+            if (input.equals("8")) {
                 break;
             }
         }
@@ -63,11 +67,13 @@ public class UserInterface {
         return
                 "\nMain menu:" +
                         "\n 1. Add new work order." +
-                        "\n 2. Remove work order." +
-                        "\n 3. View work orders" +
-                        "\n 4. Add a new employee" +
-                        "\n 5. Make user an admin" +
-                        "\n 6. Sign out" +
+                        "\n 2. Change work order." +
+                        "\n 3. Remove work order." +
+                        "\n 4. View work orders" +
+                        "\n 5. Add a new employee" +
+                        "\n 6. View employees" +
+                        "\n 7. Make user an admin" +
+                        "\n 8. Sign out" +
                         "\n 0. Reprint menu.";
 
     }
@@ -77,37 +83,7 @@ public class UserInterface {
         WorkOrderEntity newWorkOrder = new WorkOrderEntity();
 
         System.out.println("\nAdding work order");
-        System.out.println("Enter work order year:");
-        int year = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Enter work order month:");
-        int month = Integer.parseInt(scanner.nextLine());
-        while (month > 12 || month < 1) {
-            System.out.println("Invalid month!" + "\nPlease enter a valid month number(1-12)");
-            month = Integer.parseInt(scanner.nextLine());
-        }
-
-        System.out.println("Enter work order day:");
-        int day = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Enter work order start hour:");
-        int hour = Integer.parseInt(scanner.nextLine());
-        while (hour > 24 || hour < 1) {
-            System.out.println("Invalid hour!" + "\nPlease enter a valid hour(1-24)");
-            hour = Integer.parseInt(scanner.nextLine());
-        }
-
-        System.out.println("Enter work order start minutes");
-        int minute = Integer.parseInt(scanner.nextLine());
-        while (minute > 60 || minute < 0) {
-            System.out.println("Invalid minute!" + "\nPlease enter a valid minute(1-60)");
-            minute = Integer.parseInt(scanner.nextLine());
-        }
-
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month - 1, day, hour, minute);
-
-        Date date = cal.getTime();
+        Date date = createDate();
         newWorkOrder.setDate(date);
 
         System.out.println("Enter work order address:");
@@ -128,6 +104,58 @@ public class UserInterface {
         workOrders.add(newWorkOrder);
     }
 
+    public void changeWorkOrder() {
+        if (workOrders.isEmpty()) {
+            System.out.println("There are no registered work orders at this time.");
+            System.out.println(" ");
+            return;
+        }
+        viewWorkOrders();
+
+        System.out.println("Which work order would you like to change?");
+        int workOrderToChange = Integer.parseInt(scanner.nextLine());
+        while (workOrderToChange > workOrders.size() || workOrderToChange < 1) {
+            System.out.println("The number you've entered doesn't seem to be in the list.");
+            System.out.println("Please enter another number.");
+            workOrderToChange = Integer.parseInt(scanner.nextLine());
+        }
+
+        System.out.println(
+                "\nChange menu:" +
+                "\n1. Change date and time" +
+                "\n2. Change work address" +
+                "\n3. Change work description" +
+                "\n4. Change contact info");
+        System.out.println("What would you like to change?");
+        int fieldToChange = Integer.parseInt(scanner.nextLine());
+
+        switch (fieldToChange) {
+            case 1:
+                Date date = createDate();
+                workOrders.get(workOrderToChange - 1).setDate(date);
+                workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
+                break;
+            case 2:
+                System.out.println("Enter updated address:");
+                String updatedAddress = scanner.nextLine();
+                workOrders.get(workOrderToChange - 1).setAddress(updatedAddress);
+                workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
+                break;
+            case 3:
+                System.out.println("Enter updated work description:");
+                String updatedWorkDescription = scanner.nextLine();
+                workOrders.get(workOrderToChange - 1).setWorkDescription(updatedWorkDescription);
+                workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
+                break;
+            case 4:
+                System.out.println("Enter updated contact information:");
+                String updatedContactInfo = scanner.nextLine();
+                workOrders.get(workOrderToChange - 1).setContactInfo(updatedContactInfo);
+                workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
+                break;
+        }
+    }
+
     //method to remove work order from database
     public void removeWorkOrder() {
         if (workOrders.isEmpty()) {
@@ -135,15 +163,9 @@ public class UserInterface {
             System.out.println(" ");
             return;
         }
+        viewWorkOrders();
 
-        for (WorkOrderEntity workOrderEntity : workOrders) {
-            System.out.println(workOrders.indexOf(workOrderEntity) + 1 +
-                    " " + workOrderEntity.getDate() +
-                    " " + workOrderEntity.getWorkDescription() +
-                    " Customer: " + workOrderEntity.getContactInfo());
-        }
-
-        System.out.println("Which work order would you like to remove?");
+        System.out.println("\nWhich work order would you like to remove?");
         int workOrdertoBeRemoved = Integer.parseInt(scanner.nextLine());
         while (workOrdertoBeRemoved > workOrders.size() || workOrdertoBeRemoved < 1) {
             System.out.println("The number you've entered doesn't seem to be in the list.");
@@ -167,7 +189,7 @@ public class UserInterface {
                     " " + loginEntity.getUserName());
         }
 
-        System.out.println("Which account would you like to change permissions for?");
+        System.out.println("\nWhich account would you like to change permissions for?");
         int accountToMakeAdmin = Integer.parseInt(scanner.nextLine());
         while (accountToMakeAdmin > accounts.size() || accountToMakeAdmin < 1) {
             System.out.println("The id you've entered doesn't seem to be in the list.");
@@ -283,6 +305,11 @@ public class UserInterface {
     }
 
     public void viewEmployees() {
+        if (employees.isEmpty()) {
+            System.out.println("There are no employees in the database");
+            return;
+        }
+
         for (EmployeeEntity employeeEntity : employees) {
             System.out.println("_____________________" +
                     "\n First name: " + employeeEntity.getFirstName() +
@@ -292,13 +319,54 @@ public class UserInterface {
     }
 
     public void viewWorkOrders() {
+        if (workOrders.isEmpty()) {
+            System.out.println("There are no active work orders at this time.");
+            return;
+        }
+
         for (WorkOrderEntity order : workOrders) {
             System.out.println("________________________" +
-                    "\n Workorder Id: " + order.getId() +
+                    "\n" + (workOrders.indexOf(order) + 1) +
                     "\n Date of order: " + order.getDate() +
                     "\n Adress: " + order.getAddress() +
                     "\n Work description: " + order.getWorkDescription() +
-                    "\n Contact information: " + order.getContactInfo());
+                    "\n Contact information: " + order.getContactInfo() + "\n");
         }
+    }
+
+    public Date createDate() {
+        System.out.println("Enter work order year:");
+        int year = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Enter work order month:");
+        int month = Integer.parseInt(scanner.nextLine());
+        while (month > 12 || month < 1) {
+            System.out.println("Invalid month!" + "\nPlease enter a valid month number(1-12)");
+            month = Integer.parseInt(scanner.nextLine());
+        }
+
+        System.out.println("Enter work order day:");
+        int day = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Enter work order start hour:");
+        int hour = Integer.parseInt(scanner.nextLine());
+        while (hour > 24 || hour < 1) {
+            System.out.println("Invalid hour!" + "\nPlease enter a valid hour(1-24)");
+            hour = Integer.parseInt(scanner.nextLine());
+        }
+
+        System.out.println("Enter work order start minutes");
+        int minute = Integer.parseInt(scanner.nextLine());
+        while (minute > 60 || minute < 0) {
+            System.out.println("Invalid minute!" + "\nPlease enter a valid minute(1-60)");
+            minute = Integer.parseInt(scanner.nextLine());
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month - 1, day, hour, minute);
+
+        Date date = cal.getTime();
+
+        return date;
     }
 }
