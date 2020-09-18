@@ -17,6 +17,7 @@ public class UserInterface {
     ArrayList<EmployeeEntity> employees = new ArrayList<>();
     ArrayList<WorkOrderEntity> workOrders = new ArrayList<>();
     ArrayList<LoginEntity> accounts = new ArrayList<>();
+    ArrayList<WorkOrderEntity> finishedWorkOrders = new ArrayList<>();
 
     public void start() {
 
@@ -122,10 +123,10 @@ public class UserInterface {
 
         System.out.println(
                 "\nChange menu:" +
-                "\n1. Change date and time" +
-                "\n2. Change work address" +
-                "\n3. Change work description" +
-                "\n4. Change contact info");
+                        "\n1. Change date and time" +
+                        "\n2. Change work address" +
+                        "\n3. Change work description" +
+                        "\n4. Change contact info");
         System.out.println("What would you like to change?");
         int fieldToChange = Integer.parseInt(scanner.nextLine());
 
@@ -245,7 +246,6 @@ public class UserInterface {
         }
     }
 
-
     //method to make a list of all work orders in database
     public void getWorkOrder() {
         SessionFactory factory = new Configuration()
@@ -323,16 +323,26 @@ public class UserInterface {
             System.out.println("There are no active work orders at this time.");
             return;
         }
-
-        for (WorkOrderEntity order : workOrders) {
-            System.out.println("________________________" +
-                    "\n" + (workOrders.indexOf(order) + 1) +
-                    "\n Date of order: " + order.getDate() +
-                    "\n Adress: " + order.getAddress() +
-                    "\n Work description: " + order.getWorkDescription() +
-                    "\n Contact information: " + order.getContactInfo() + "\n");
+        System.out.println("Would you like to view workorders or finished workorders?");
+        System.out.println("1: Prints current workorders");
+        System.out.println("2: Prints finished workorders");
+        int choice = Integer.parseInt(scanner.nextLine());
+        switch (choice) {
+            case 1:
+                for (WorkOrderEntity order : workOrders) {
+                    System.out.println("________________________" +
+                            "\n" + (workOrders.indexOf(order) + 1) +
+                            "\n Date of order: " + order.getDate() +
+                            "\n Adress: " + order.getAddress() +
+                            "\n Work description: " + order.getWorkDescription() +
+                            "\n Contact information: " + order.getContactInfo() + "\n"
+                    );
+                }
+            case 2:
+                viewFinishedWorkOrders();
         }
     }
+
 
     public Date createDate() {
         System.out.println("Enter work order year:");
@@ -368,5 +378,21 @@ public class UserInterface {
         Date date = cal.getTime();
 
         return date;
+    }
+
+    public void viewFinishedWorkOrders() {
+        if (workOrders.isEmpty()) {
+            System.out.println("There are no finished workorders.");
+        }
+        for (WorkOrderEntity workOrderEntity : workOrders) {
+            if (workOrderEntity.getStatus() == 4) {
+                System.out.println("________________________" +
+                        "\n" + (workOrders.indexOf(workOrderEntity) + 1) +
+                        "\n Date of order: " + workOrderEntity.getDate() +
+                        "\n Adress: " + workOrderEntity.getAddress() +
+                        "\n Work description: " + workOrderEntity.getWorkDescription() +
+                        "\n Contact information: " + workOrderEntity.getContactInfo() + "\n");
+            }
+        }
     }
 }
