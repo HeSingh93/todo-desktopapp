@@ -1,5 +1,6 @@
 package com.example.todo.controllers;
 
+import Entities.EmployeeEntity;
 import Entities.LoginEntity;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
@@ -42,6 +43,27 @@ public class Login {
     }
 //TODO Lägg in while-loop
 
+    public void makeAdmin(LoginEntity loginEntity) {
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(LoginEntity.class)
+                .addAnnotatedClass(EmployeeEntity.class)
+                .buildSessionFactory();
+
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            loginEntity.setAdmin(true);
+            session.saveOrUpdate(loginEntity);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+            factory.close();
+        }
+    }
 }
 
 

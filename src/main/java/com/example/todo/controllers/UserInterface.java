@@ -12,12 +12,15 @@ import java.util.*;
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
     WorkOrder workOrder = new WorkOrder();
+    Login login = new Login();
 
     ArrayList<EmployeeEntity> employees = new ArrayList<>();
     ArrayList<WorkOrderEntity> workOrders = new ArrayList<>();
+    ArrayList<LoginEntity> accounts = new ArrayList<>();
 
     public void start() {
 
+        getAccounts();
         getEmployees();
         getWorkOrder();
 
@@ -37,14 +40,19 @@ public class UserInterface {
                     removeWorkOrder();
                     break;
                 case "3":
+                    getAccounts();
                     viewWorkOrders();
+                    viewEmployees();
                     break;
                 case "4":
                     addNewEmployee();
                     break;
+                case "5":
+                    updateAccount();
+                    break;
             }
 
-            if (input.equals("5")) {
+            if (input.equals("6")) {
                 break;
             }
         }
@@ -58,7 +66,8 @@ public class UserInterface {
                         "\n 2. Remove work order." +
                         "\n 3. View work orders" +
                         "\n 4. Add a new employee" +
-                        "\n 5. Sign out" +
+                        "\n 5. Make user an admin" +
+                        "\n 6. Sign out" +
                         "\n 0. Reprint menu.";
 
     }
@@ -132,6 +141,28 @@ public class UserInterface {
         workOrders.remove(workOrdertoBeRemoved - 1);
     }
 
+    public void updateAccount() {
+        if (accounts.isEmpty()) {
+            System.out.println("There are no registered accounts");
+            System.out.println(" ");
+            return;
+        }
+
+        for (LoginEntity loginEntity : accounts) {
+            System.out.println(accounts.indexOf(loginEntity) + 1 +
+                    " " + loginEntity.getUserName());
+        }
+
+        System.out.println("Which account would you like to change permissions for?");
+        int accountToMakeAdmin = Integer.parseInt(scanner.nextLine());
+        while (accountToMakeAdmin > accounts.size() || accountToMakeAdmin < 1) {
+            System.out.println("The id you've entered doesn't seem to be in the list.");
+            System.out.println("Please enter another id.");
+            accountToMakeAdmin = Integer.parseInt(scanner.nextLine());
+        }
+        login.makeAdmin(accounts.get(accountToMakeAdmin - 1));
+    }
+
     //method to create a list of all employees in database
     public void getEmployees() {
         SessionFactory factory = new Configuration()
@@ -154,6 +185,30 @@ public class UserInterface {
             session.close();
         }
     }
+
+    public void getAccounts() {
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(LoginEntity.class)
+                .addAnnotatedClass(EmployeeEntity.class)
+                .buildSessionFactory();
+
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            List<LoginEntity> tempAccounts = session.createQuery("from LoginEntity").getResultList();
+            accounts.addAll(tempAccounts);
+            System.out.println(tempAccounts);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            factory.close();
+            session.close();
+        }
+    }
+
 
     //method to make a list of all work orders in database
     public void getWorkOrder() {
@@ -211,6 +266,15 @@ public class UserInterface {
 
         loginEntity.setEmployeeId(employees.get(employees.size() - 1).getId());
         signup.signUpAccount(loginEntity);
+    }
+
+    public void viewEmployees() {
+        for (EmployeeEntity employeeEntity : employees) {
+            System.out.println("_____________________" +
+                    "\n First name: " + employeeEntity.getFirstName() +
+                    "\n Last name: " + employeeEntity.getLastName() +
+                    "\n Telephone number: " + employeeEntity.getTelephoneNo());
+        }
     }
 
     public void viewWorkOrders() {
