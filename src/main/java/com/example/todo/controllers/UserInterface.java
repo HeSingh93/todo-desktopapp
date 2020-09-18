@@ -17,7 +17,6 @@ public class UserInterface {
     ArrayList<EmployeeEntity> employees = new ArrayList<>();
     ArrayList<WorkOrderEntity> workOrders = new ArrayList<>();
     ArrayList<LoginEntity> accounts = new ArrayList<>();
-    ArrayList<WorkOrderEntity> finishedWorkOrders = new ArrayList<>();
 
     public void start() {
 
