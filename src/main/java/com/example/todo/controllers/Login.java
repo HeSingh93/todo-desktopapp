@@ -20,22 +20,21 @@ public class Login {
         try {
             session.beginTransaction();
             LoginEntity theUser = session.createQuery("from LoginEntity where username = '" + userName + "'", LoginEntity.class).getSingleResult();
+
             if (theUser.getUserName().equals(userName) && theUser.getPassword().equals(password) && theUser.isAdmin()) {
-                session.save(theUser);
                 System.out.println("Welcome " + theUser.getUserName() + "!");
                 validLogin = true;
             }
             session.getTransaction().commit();
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             factory.close();
             session.close();
         }
+
         return validLogin;
     }
-//TODO Lägg in while-loop
 
     public void makeAdmin(LoginEntity loginEntity) {
         SessionFactory factory = new Configuration()
