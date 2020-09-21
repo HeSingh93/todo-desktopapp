@@ -45,6 +45,8 @@ public class Login {
         return validLogin;
     }
 
+    //This method sets the isAdmin flag to true
+    //which allows the account to be used when logging in to the desktop application
     public void makeAdmin(LoginEntity loginEntity) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")

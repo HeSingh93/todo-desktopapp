@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 
 public class SignUp {
 
+    //Method to create a new account in database
     public void signUpAccount(LoginEntity loginEntity) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -30,6 +31,7 @@ public class SignUp {
         }
     }
 
+    //Method to add a new employee to database
     public void signUpEmployee(EmployeeEntity employeeEntity) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")

@@ -104,6 +104,7 @@ public class UserInterface {
         workOrders.add(newWorkOrder);
     }
 
+    //method to make changes to a specific workorder in the database
     public void changeWorkOrder() {
         if (workOrders.isEmpty()) {
             System.out.println("There are no registered work orders at this time.");
@@ -177,6 +178,7 @@ public class UserInterface {
         workOrders.remove(workOrdertoBeRemoved - 1);
     }
 
+    //method to make changes to an existing account
     public void updateAccount() {
         if (accounts.isEmpty()) {
             System.out.println("There are no registered accounts");
@@ -222,6 +224,7 @@ public class UserInterface {
         }
     }
 
+    //method to populate an ArrayList with account objects from the database
     public void getAccounts() {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -298,6 +301,44 @@ public class UserInterface {
         signup.signUpAccount(loginEntity);
     }
 
+    //method to make a Date object which can be used when creating a new workorder object
+    //or when making changes to a workorder object
+    public Date createDate() {
+        System.out.println("Enter work order year:");
+        int year = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Enter work order month:");
+        int month = Integer.parseInt(scanner.nextLine());
+        while (month > 12 || month < 1) {
+            System.out.println("Invalid month!" + "\nPlease enter a valid month number(1-12)");
+            month = Integer.parseInt(scanner.nextLine());
+        }
+
+        System.out.println("Enter work order day:");
+        int day = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Enter work order start hour:");
+        int hour = Integer.parseInt(scanner.nextLine());
+        while (hour > 24 || hour < 1) {
+            System.out.println("Invalid hour!" + "\nPlease enter a valid hour(1-24)");
+            hour = Integer.parseInt(scanner.nextLine());
+        }
+
+        System.out.println("Enter work order start minutes");
+        int minute = Integer.parseInt(scanner.nextLine());
+        while (minute > 60 || minute < 0) {
+            System.out.println("Invalid minute!" + "\nPlease enter a valid minute(1-60)");
+            minute = Integer.parseInt(scanner.nextLine());
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month - 1, day, hour, minute);
+
+        Date date = cal.getTime();
+
+        return date;
+    }
+
     public void viewEmployees() {
         if (employees.isEmpty()) {
             System.out.println("There are no employees in the database");
@@ -335,43 +376,6 @@ public class UserInterface {
             case 2:
                 viewFinishedWorkOrders();
         }
-    }
-
-
-    public Date createDate() {
-        System.out.println("Enter work order year:");
-        int year = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Enter work order month:");
-        int month = Integer.parseInt(scanner.nextLine());
-        while (month > 12 || month < 1) {
-            System.out.println("Invalid month!" + "\nPlease enter a valid month number(1-12)");
-            month = Integer.parseInt(scanner.nextLine());
-        }
-
-        System.out.println("Enter work order day:");
-        int day = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Enter work order start hour:");
-        int hour = Integer.parseInt(scanner.nextLine());
-        while (hour > 24 || hour < 1) {
-            System.out.println("Invalid hour!" + "\nPlease enter a valid hour(1-24)");
-            hour = Integer.parseInt(scanner.nextLine());
-        }
-
-        System.out.println("Enter work order start minutes");
-        int minute = Integer.parseInt(scanner.nextLine());
-        while (minute > 60 || minute < 0) {
-            System.out.println("Invalid minute!" + "\nPlease enter a valid minute(1-60)");
-            minute = Integer.parseInt(scanner.nextLine());
-        }
-
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month - 1, day, hour, minute);
-
-        Date date = cal.getTime();
-
-        return date;
     }
 
     public void viewFinishedWorkOrders() {
