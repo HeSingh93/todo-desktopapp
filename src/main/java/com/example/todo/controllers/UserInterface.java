@@ -290,16 +290,11 @@ public class UserInterface {
         signup.signUpEmployee(employeeEntity);
         getEmployees();
 
-        System.out.println("Enter username:");
-        String userName = scanner.nextLine();
-        loginEntity.setUserName(userName);
-
-        System.out.println("Enter password:");
-        String password = scanner.nextLine();
-        loginEntity.setPassword(password);
+        loginEntity.setUserName(firstName + lastName);
+        loginEntity.setPassword("password");
         loginEntity.setAdmin(false);
-
         loginEntity.setEmployeeId(employees.get(employees.size() - 1).getId());
+        
         signup.signUpAccount(loginEntity);
     }
 
