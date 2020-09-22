@@ -89,6 +89,8 @@ public class UserInterface {
         System.out.println("\nAdding work order");
         newWorkOrder.setDate(createDate());
 
+        newWorkOrder.setTime(createTime());
+
         System.out.println("Enter work order address:");
         String address = scanner.nextLine();
         newWorkOrder.setAddress(address);
@@ -136,6 +138,7 @@ public class UserInterface {
         switch (fieldToChange) {
             case 1:
                 workOrders.get(workOrderToChange - 1).setDate(createDate());
+                workOrders.get(workOrderToChange - 1).setTime(createTime());
                 workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
                 break;
             case 2:
@@ -315,13 +318,17 @@ public class UserInterface {
         System.out.println("Enter work order day:");
         String day = scanner.nextLine();
 
+        return year + "/" + month + "/" + day;
+    }
+
+    public String createTime() {
         System.out.println("Enter work order start hour:");
         String hour = scanner.nextLine();
 
         System.out.println("Enter work order start minutes:");
         String minutes = scanner.nextLine();
 
-        return year + "/" + month + "/" + day + " time: " + hour + ":" + minutes;
+        return hour + ":" + minutes;
     }
 
     public void viewEmployees() {
@@ -347,6 +354,7 @@ public class UserInterface {
             System.out.println("________________________" +
                     "\n" + (workOrders.indexOf(workOrderEntity) + 1) +
                     "\nDate of order: " + workOrderEntity.getDate() +
+                    "\nTime of order: " + workOrderEntity.getTime() +
                     "\nAddress: " + workOrderEntity.getAddress() +
                     "\nWork description: " + workOrderEntity.getWorkDescription() +
                     "\nContact information: " + workOrderEntity.getContactInfo());
@@ -379,6 +387,7 @@ public class UserInterface {
                         "\nStatus: " + WorkOrderStatus.getStatus(status) +
                         "\n" + (workOrders.indexOf(workOrderEntity) + 1) +
                         "\nDate of order: " + workOrderEntity.getDate() +
+                        "\nTime of order: " + workOrderEntity.getTime() +
                         "\nAddress: " + workOrderEntity.getAddress() +
                         "\nWork description: " + workOrderEntity.getWorkDescription() +
                         "\nContact information: " + workOrderEntity.getContactInfo());

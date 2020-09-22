@@ -17,6 +17,9 @@ public class WorkOrderEntity {
     @Column(name = "date")
     private String date;
 
+    @Column(name = "time")
+    private String time;
+
     @Column(name = "address")
     private String address;
 
@@ -51,92 +54,100 @@ public class WorkOrderEntity {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getTime() {
+        return time;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getWorkDescription() {
         return workDescription;
-    }
-
-    public void setWorkDescription(String workDescription) {
-        this.workDescription = workDescription;
     }
 
     public String getContactInfo() {
         return contactInfo;
     }
 
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
     public Integer getCustomerId() {
         return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public Integer getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public String getWorkStarted() {
         return workStarted;
     }
 
-    public void setWorkStarted(String workStarted) {
-        this.workStarted = workStarted;
-    }
-
     public String getWorkFinished() {
         return workFinished;
-    }
-
-    public void setWorkFinished(String workFinished) {
-        this.workFinished = workFinished;
     }
 
     public double getTravelHours() {
         return travelHours;
     }
 
-    public void setTravelHours(double travelHours) {
-        this.travelHours = travelHours;
-    }
-
     public String getComment() {
         return comment;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setWorkDescription(String workDescription) {
+        this.workDescription = workDescription;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public void setWorkStarted(String workStarted) {
+        this.workStarted = workStarted;
+    }
+
+    public void setWorkFinished(String workFinished) {
+        this.workFinished = workFinished;
+    }
+
+    public void setTravelHours(double travelHours) {
+        this.travelHours = travelHours;
     }
 
     public void setComment(String comment) {
