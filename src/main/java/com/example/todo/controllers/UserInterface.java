@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.*;
 
 public class UserInterface {
@@ -297,7 +299,7 @@ public class UserInterface {
         loginEntity.setPassword("password");
         loginEntity.setAdmin(false);
         loginEntity.setEmployeeId(employees.get(employees.size() - 1).getId());
-        
+
         signup.signUpAccount(loginEntity);
     }
 
@@ -358,38 +360,30 @@ public class UserInterface {
             System.out.println("There are no active work orders at this time.");
             return;
         }
-        System.out.println("Would you like to view workorders or finished workorders?");
-        System.out.println("1: Prints current workorders");
-        System.out.println("2: Prints finished workorders");
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                for (WorkOrderEntity order : workOrders) {
-                    System.out.println("________________________" +
-                            "\n" + (workOrders.indexOf(order) + 1) +
-                            "\n Date of order: " + order.getDate() +
-                            "\n Adress: " + order.getAddress() +
-                            "\n Work description: " + order.getWorkDescription() +
-                            "\n Contact information: " + order.getContactInfo() + "\n"
-                    );
-                }
-            case 2:
-                viewFinishedWorkOrders();
-        }
+        System.out.println("Select the workorder status you would like to view.");
+        System.out.println("1. Unassigned");
+        System.out.println("2. Assigned");
+        System.out.println("3. Accepted");
+        System.out.println("4. Done");
+        System.out.println("Input choice:");
+        int input = Integer.parseInt(scanner.nextLine());
+
+        findWorkOrderByStatus(input);
     }
 
-    public void viewFinishedWorkOrders() {
+    public void findWorkOrderByStatus(int status) {
         if (workOrders.isEmpty()) {
             System.out.println("There are no finished workorders.");
         }
         for (WorkOrderEntity workOrderEntity : workOrders) {
-            if (workOrderEntity.getStatus() == 4) {
+            if (workOrderEntity.getStatus() == status) {
                 System.out.println("________________________" +
+                        "\nStatus: " + WorkOrderStatus.getStatus(status) +
                         "\n" + (workOrders.indexOf(workOrderEntity) + 1) +
-                        "\n Date of order: " + workOrderEntity.getDate() +
-                        "\n Adress: " + workOrderEntity.getAddress() +
-                        "\n Work description: " + workOrderEntity.getWorkDescription() +
-                        "\n Contact information: " + workOrderEntity.getContactInfo() + "\n");
+                        "\nDate of order: " + workOrderEntity.getDate() +
+                        "\nAdress: " + workOrderEntity.getAddress() +
+                        "\nWork description: " + workOrderEntity.getWorkDescription() +
+                        "\nContact information: " + workOrderEntity.getContactInfo());
             }
         }
     }
