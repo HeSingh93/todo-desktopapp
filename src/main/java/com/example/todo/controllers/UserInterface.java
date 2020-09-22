@@ -320,7 +320,7 @@ public class UserInterface {
 
         return year + "/" + month + "/" + day;
     }
-
+    //method to save and return a workorders starting time
     public String createTime() {
         System.out.println("Enter work order start hour:");
         String hour = scanner.nextLine();
@@ -330,7 +330,7 @@ public class UserInterface {
 
         return hour + ":" + minutes;
     }
-
+    // method to view all employees
     public void viewEmployees() {
         if (employees.isEmpty()) {
             System.out.println("There are no employees in the database");
@@ -344,7 +344,7 @@ public class UserInterface {
                     "\n Telephone number: " + employeeEntity.getTelephoneNo());
         }
     }
-
+    //method to view all workorders
     public void viewAllWorkOrders() {
         if (workOrders.isEmpty()) {
             System.out.println("There are no workorders in the database");
@@ -360,7 +360,7 @@ public class UserInterface {
                     "\nContact information: " + workOrderEntity.getContactInfo());
         }
     }
-
+    //method to view workorders with a certain status
     public void viewWorkOrders() {
         if (workOrders.isEmpty()) {
             System.out.println("There are no active work orders at this time.");
@@ -376,7 +376,7 @@ public class UserInterface {
 
         findWorkOrderByStatus(input);
     }
-
+    //method to find workorders by status with the users input
     public void findWorkOrderByStatus(int status) {
         if (workOrders.isEmpty()) {
             System.out.println("There are no finished workorders.");
