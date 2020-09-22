@@ -14,9 +14,8 @@ public class WorkOrderEntity {
     @Column(name = "id")
     private Integer id;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "date")
-    private Date date;
+    private String date;
 
     @Column(name = "address")
     private String address;
@@ -36,13 +35,11 @@ public class WorkOrderEntity {
     @Column(name = "status")
     private Integer status;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "work_started")
-    private Date workStarted;
+    private String workStarted;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "work_finished")
-    private Date workFinished;
+    private String workFinished;
 
     @Column(name = "travel_hours")
     private double travelHours;
@@ -58,11 +55,11 @@ public class WorkOrderEntity {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -114,19 +111,19 @@ public class WorkOrderEntity {
         this.status = status;
     }
 
-    public Date getWorkStarted() {
+    public String getWorkStarted() {
         return workStarted;
     }
 
-    public void setWorkStarted(Date workStarted) {
+    public void setWorkStarted(String workStarted) {
         this.workStarted = workStarted;
     }
 
-    public Date getWorkFinished() {
+    public String getWorkFinished() {
         return workFinished;
     }
 
-    public void setWorkFinished(Date workFinished) {
+    public void setWorkFinished(String workFinished) {
         this.workFinished = workFinished;
     }
 

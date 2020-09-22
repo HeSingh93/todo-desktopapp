@@ -9,6 +9,8 @@ import org.hibernate.cfg.Configuration;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UserInterface {
@@ -85,8 +87,7 @@ public class UserInterface {
         WorkOrderEntity newWorkOrder = new WorkOrderEntity();
 
         System.out.println("\nAdding work order");
-        Date date = createDate();
-        newWorkOrder.setDate(date);
+        newWorkOrder.setDate(createDate());
 
         System.out.println("Enter work order address:");
         String address = scanner.nextLine();
@@ -134,8 +135,7 @@ public class UserInterface {
 
         switch (fieldToChange) {
             case 1:
-                Date date = createDate();
-                workOrders.get(workOrderToChange - 1).setDate(date);
+                workOrders.get(workOrderToChange - 1).setDate(createDate());
                 workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
                 break;
             case 2:
@@ -305,40 +305,23 @@ public class UserInterface {
 
     //method to make a Date object which can be used when creating a new workorder object
     //or when making changes to a workorder object
-    public Date createDate() {
+    public String createDate() {
         System.out.println("Enter work order year:");
-        int year = Integer.parseInt(scanner.nextLine());
+        String year = scanner.nextLine();
 
         System.out.println("Enter work order month:");
-        int month = Integer.parseInt(scanner.nextLine());
-        while (month > 12 || month < 1) {
-            System.out.println("Invalid month!" + "\nPlease enter a valid month number(1-12)");
-            month = Integer.parseInt(scanner.nextLine());
-        }
+        String month = scanner.nextLine();
 
         System.out.println("Enter work order day:");
-        int day = Integer.parseInt(scanner.nextLine());
+        String day = scanner.nextLine();
 
         System.out.println("Enter work order start hour:");
-        int hour = Integer.parseInt(scanner.nextLine());
-        while (hour > 24 || hour < 1) {
-            System.out.println("Invalid hour!" + "\nPlease enter a valid hour(1-24)");
-            hour = Integer.parseInt(scanner.nextLine());
-        }
+        String hour = scanner.nextLine();
 
-        System.out.println("Enter work order start minutes");
-        int minute = Integer.parseInt(scanner.nextLine());
-        while (minute > 60 || minute < 0) {
-            System.out.println("Invalid minute!" + "\nPlease enter a valid minute(1-60)");
-            minute = Integer.parseInt(scanner.nextLine());
-        }
+        System.out.println("Enter work order start minutes:");
+        String minutes = scanner.nextLine();
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month - 1, day, hour, minute);
-
-        Date date = cal.getTime();
-
-        return date;
+        return year + "/" + month + "/" + day + " time: " + hour + ":" + minutes;
     }
 
     public void viewEmployees() {
