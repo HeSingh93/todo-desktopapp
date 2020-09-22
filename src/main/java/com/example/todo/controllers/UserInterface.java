@@ -114,9 +114,9 @@ public class UserInterface {
             System.out.println(" ");
             return;
         }
-        viewWorkOrders();
+        viewAllWorkOrders();
 
-        System.out.println("Which work order would you like to change?");
+        System.out.println("\nWhich work order would you like to change?");
         int workOrderToChange = Integer.parseInt(scanner.nextLine());
         while (workOrderToChange > workOrders.size() || workOrderToChange < 1) {
             System.out.println("The number you've entered doesn't seem to be in the list.");
@@ -338,6 +338,21 @@ public class UserInterface {
         }
     }
 
+    public void viewAllWorkOrders() {
+        if (workOrders.isEmpty()) {
+            System.out.println("There are no workorders in the database");
+        }
+
+        for (WorkOrderEntity workOrderEntity : workOrders) {
+            System.out.println("________________________" +
+                    "\n" + (workOrders.indexOf(workOrderEntity) + 1) +
+                    "\nDate of order: " + workOrderEntity.getDate() +
+                    "\nAddress: " + workOrderEntity.getAddress() +
+                    "\nWork description: " + workOrderEntity.getWorkDescription() +
+                    "\nContact information: " + workOrderEntity.getContactInfo());
+        }
+    }
+
     public void viewWorkOrders() {
         if (workOrders.isEmpty()) {
             System.out.println("There are no active work orders at this time.");
@@ -364,7 +379,7 @@ public class UserInterface {
                         "\nStatus: " + WorkOrderStatus.getStatus(status) +
                         "\n" + (workOrders.indexOf(workOrderEntity) + 1) +
                         "\nDate of order: " + workOrderEntity.getDate() +
-                        "\nAdress: " + workOrderEntity.getAddress() +
+                        "\nAddress: " + workOrderEntity.getAddress() +
                         "\nWork description: " + workOrderEntity.getWorkDescription() +
                         "\nContact information: " + workOrderEntity.getContactInfo());
             }
