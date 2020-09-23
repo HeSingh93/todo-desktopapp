@@ -7,10 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UserInterface {
@@ -105,7 +101,7 @@ public class UserInterface {
 
         newWorkOrder.setStatus(WorkOrderStatus.UNASSIGNED);
 
-        workOrder.addWorkOrder(newWorkOrder);
+        workOrder.addOrUpdateWorkOrder(newWorkOrder);
         workOrders.add(newWorkOrder);
     }
 
@@ -139,25 +135,25 @@ public class UserInterface {
             case 1:
                 workOrders.get(workOrderToChange - 1).setDate(createDate());
                 workOrders.get(workOrderToChange - 1).setTime(createTime());
-                workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
+                workOrder.addOrUpdateWorkOrder(workOrders.get(workOrderToChange - 1));
                 break;
             case 2:
                 System.out.println("Enter updated address:");
                 String updatedAddress = scanner.nextLine();
                 workOrders.get(workOrderToChange - 1).setAddress(updatedAddress);
-                workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
+                workOrder.addOrUpdateWorkOrder(workOrders.get(workOrderToChange - 1));
                 break;
             case 3:
                 System.out.println("Enter updated work description:");
                 String updatedWorkDescription = scanner.nextLine();
                 workOrders.get(workOrderToChange - 1).setWorkDescription(updatedWorkDescription);
-                workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
+                workOrder.addOrUpdateWorkOrder(workOrders.get(workOrderToChange - 1));
                 break;
             case 4:
                 System.out.println("Enter updated contact information:");
                 String updatedContactInfo = scanner.nextLine();
                 workOrders.get(workOrderToChange - 1).setContactInfo(updatedContactInfo);
-                workOrder.updateWorkOrder(workOrders.get(workOrderToChange - 1));
+                workOrder.addOrUpdateWorkOrder(workOrders.get(workOrderToChange - 1));
                 break;
         }
     }
@@ -320,6 +316,7 @@ public class UserInterface {
 
         return year + "/" + month + "/" + day;
     }
+
     //method to save and return a workorders starting time
     public String createTime() {
         System.out.println("Enter work order start hour:");
@@ -330,6 +327,7 @@ public class UserInterface {
 
         return hour + ":" + minutes;
     }
+
     // method to view all employees
     public void viewEmployees() {
         if (employees.isEmpty()) {
@@ -344,6 +342,7 @@ public class UserInterface {
                     "\n Telephone number: " + employeeEntity.getTelephoneNo());
         }
     }
+
     //method to view all workorders
     public void viewAllWorkOrders() {
         if (workOrders.isEmpty()) {
@@ -360,6 +359,7 @@ public class UserInterface {
                     "\nContact information: " + workOrderEntity.getContactInfo());
         }
     }
+
     //method to view workorders with a certain status
     public void viewWorkOrders() {
         if (workOrders.isEmpty()) {
@@ -376,6 +376,7 @@ public class UserInterface {
 
         findWorkOrderByStatus(input);
     }
+
     //method to find workorders by status with the users input
     public void findWorkOrderByStatus(int status) {
         if (workOrders.isEmpty()) {
